@@ -9,7 +9,9 @@ import home.spring.rest.web.service.RoleServiceImp;
 import home.spring.rest.web.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,22 +45,22 @@ public class RestAdminController {
     }
 
     @GetMapping()
-    public List<User> allUsers() {
-        return userService.listUsers();
+    public ResponseEntity<List<User>> allUsers() {
+        return ResponseEntity.ok().body(userService.listUsers());
     }
 
     @GetMapping(value = "/roles")
-    public List<Role> allRoles() {
-        return roleRepository.findAll();
+    public ResponseEntity<List<Role>> allRoles() {
+        return ResponseEntity.ok().body(roleRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public User show(@PathVariable("id") long id, Model model) {
-        return userService.getById(id);
+    public ResponseEntity<User> show(@PathVariable("id") long id, Model model) {
+        return ResponseEntity.ok().body(userService.getById(id));
     }
 
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User createWithLocation(@RequestBody UserDto userDto) {
+    public ResponseEntity<User> createWithLocation(@RequestBody UserDto userDto) {
         ModelMapper modelMapper = new ModelMapper();
 
         User user = modelMapper.map(userDto, User.class);
@@ -69,31 +71,36 @@ public class RestAdminController {
             user.setRoles(Collections.singleton(DefaultRole));
         }
         userService.save(user);
-        return user;
+        return ResponseEntity.ok().body(user);
     }
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void editWithLocation(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> editWithLocation(@RequestBody UserDto userDto) {
         ModelMapper modelMapper = new ModelMapper();
 
         User user = modelMapper.map(userDto, User.class);
         user.setRoles(roleService.getRoles(userDto));
         userService.update(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteWithLocation(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> deleteWithLocation(@RequestBody UserDto userDto) {
         userService.remove(userDto.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /*
+    Здесь была аннотация @ResponseBody -- в этом месте данная она не нужна, так как @RestController
+    уже  подтягивает эту аннотацию на методы
+     */
     @GetMapping("/getOne")
-    @ResponseBody
-    public User getOne(long id) {
-        return userService.getById(id);
+    public ResponseEntity<User> getOne(long id) {
+        return ResponseEntity.ok().body(userService.getById(id));
     }
 
     @GetMapping("/auth")
-    public User auth(Principal principal) {
-        return userService.getByFirstName(principal.getName());
+    public ResponseEntity<User> auth(Principal principal) {
+        return ResponseEntity.ok().body(userService.getByFirstName(principal.getName()));
     }
 }

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,11 +11,6 @@
     <style> #{
         position: fixed;
         height: 100%;
-    } </style>
-
-    <style> #then {
-        display: flex;
-        flex-wrap: wrap;
     } </style>
 
     <style>
@@ -67,7 +61,7 @@
         <div class="col-md-12 " style="background-color: black">
             <div class="box">
                 <b style="color: white; font-size:150%" id="header"> </b>
-                <a class="btn btn-dark "  href="/logout">Logout</a>
+                <a class="btn btn-dark " href="/logout">Logout</a>
             </div>
         </div>
     </div>
@@ -77,8 +71,8 @@
     <div class="row">
         <div class="col-md-2 no-margin" style="background-color: white; height: 1200px" id="secondColumn">
             <br/>
-                <a class="btn btn-primary btn-block " href="/admin">Admin</a>
-                <a class="btn btn-primary btn-block " href="/user">User</a>
+            <a class="btn btn-primary btn-block " href="/admin">Admin</a>
+            <a class="btn btn-primary btn-block " href="/user">User</a>
         </div>
 
         <div class="col-md-10" style="background-color: whitesmoke; height: 1200px" id="thirdColumn">
@@ -116,7 +110,7 @@
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="data" >
+                                    <tbody id="data">
 
                                     </tbody>
 
@@ -167,10 +161,10 @@
     </div>
 </div>
 
-<div class="myForm1" >
+<div class="myForm1">
     <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <form  id="formToEdit">
+        <form id="formToEdit">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -207,7 +201,7 @@
 
                         <div class="form-group">
                             <label for="roles" class="col-form-label">Role:</label>
-                            <select multiple class="form-control" id="roles" name="roles"  >
+                            <select multiple class="form-control" id="roles" name="roles">
                             </select>
 
                         </div>
@@ -216,7 +210,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
 
-                                id ="butnCloseEdit" data-dismiss="modal">Close</button>
+                                id="butnCloseEdit" data-dismiss="modal">Close
+                        </button>
                         <button type="button" class="btn btn-primary" id="butnSaveEdit">Save</button>
                     </div>
                 </div>
@@ -226,10 +221,10 @@
     </div>
 </div>
 
-<div class="myForm2" >
+<div class="myForm2">
     <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <form  id = "formToDelete">
+        <form id="formToDelete">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -261,7 +256,7 @@
 
                         <div class="form-group">
                             <label for="roles" class="col-form-label">Role:</label>
-                            <select multiple class="form-control"   id="roles"  name="roles">
+                            <select multiple class="form-control" id="roles" name="roles">
                             </select>
                         </div>
 
@@ -287,7 +282,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script  src="/main_admin.js" > </script>
+<script src="/main_admin.js"></script>
 
 </body>
 </html>

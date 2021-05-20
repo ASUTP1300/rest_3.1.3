@@ -155,7 +155,8 @@ $('#butnDel').on('click', function () {
     delData("/api/delete", userJSON);
 
     //Обновление таблицы
-    updateTable();
+    $(`#data #tr${userJSON.id}`).remove();
+
 
     //Очистка формы
     $('#formToDelete').trigger('reset');
@@ -173,12 +174,9 @@ $('#butnCreate').on('click', function () {
 
     //Отправка на сервер
     postData("/api/save", userJSON)
-        .then((data)=>{
+        .then((data) => {
             addRowToTable(data)
         });
-
-    //Обновление таблицы
-  //  updateTable();
 
     //Очистка формы
     $('#formToCreateUser').trigger('reset');
@@ -195,8 +193,8 @@ $('#butnSaveEdit').on('click', function () {
     editTable(userJSON);
 
     //Отправка на сервер
-   const cur = putData("/api/update", userJSON);
-   console.log(cur);
+    const cur = putData("/api/update", userJSON);
+    console.log(cur);
 
 })
 
@@ -263,13 +261,13 @@ function addRowToTable(u) {
 
     //Создаем строку таблицы и добавляем ее
     var row = d.createElement("TR");
+    row.setAttribute('id', `'tr${u.id}'`);
     tbody.appendChild(row);
     row.innerHTML = temp
 }
 
 
 function editTable(JSON) {
-    let ID = JSON.id;
     $(`#id${JSON.id}`).text(`${JSON.id}`);
     $(`#firstName${JSON.id}`).text(JSON.firstName);
     $(`#lastName${JSON.id}`).text(JSON.lastName);
